@@ -20,7 +20,6 @@ const MovieDetailsPage = () => {
     async function fetchMovie() {
       try {
         const response = await getMoviesId(movieId);
-        console.log(response);
         setMovie(response);
       } catch (error) {
         if (error.code !== 'ERR_CANCELED') {

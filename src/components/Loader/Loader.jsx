@@ -1,10 +1,10 @@
 import css from './Loader.module.css';
-import { MagnifyingGlass } from 'react-loader-spinner';
+import { FallingLines } from 'react-loader-spinner';
 
 const Loader = () => {
   return (
     <div className={css.Loader}>
-      <MagnifyingGlass
+      <FallingLines
         visible={true}
         height="80"
         width="80"

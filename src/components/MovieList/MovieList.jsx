@@ -4,10 +4,9 @@ import css from './MovieList.module.css';
 
 const MovieList = ({ moviesList }) => {
   const location = useLocation();
-  console.log('moviesList', moviesList);
   return (
     <div>
-      <ul>
+      <ul className={css.list}>
         {moviesList.map(movie => (
           <li className={css.listItem} key={movie.id}>
             <Link to={`/movies/${movie.id}`} state={location}>

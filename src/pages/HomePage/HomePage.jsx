@@ -11,7 +11,6 @@ const HomePage = () => {
   const [movies, setMovies] = useState([]);
 
   const location = useLocation();
-  console.log('home', location);
 
   const trendingFilms = async () => {
     try {

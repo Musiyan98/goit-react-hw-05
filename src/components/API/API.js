@@ -7,7 +7,6 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${API_KEY}`;
 
 export const getTrendMovies = async () => {
   const response = await axios.get('trending/movie/day');
-  console.log('getTrendMovies', response.data.results);
   return response.data.results;
 };
 
@@ -17,24 +16,20 @@ export const getFilm = async query => {
       query: query,
     },
   });
-  console.log('getFilm', response.data.results);
   return response.data.results;
 };
 
 export const getMoviesId = async movieId => {
   const response = await axios.get(`movie/${movieId}`);
-  console.log('getMoviesId', response.data);
   return response.data;
 };
 
 export const getMoviesCast = async movieId => {
   const response = await axios.get(`/movie/${movieId}/credits`);
-  console.log('getMoviesCast', response.data);
   return response.data;
 };
 
 export const getMoviesReviews = async movieId => {
   const response = await axios.get(`/movie/${movieId}/reviews`);
-  console.log('getMoviesReviews', response.data);
   return response.data.results;
 };
