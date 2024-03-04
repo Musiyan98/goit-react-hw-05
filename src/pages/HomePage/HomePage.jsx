@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Loader from '../../components/Loader/Loader.jsx';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
@@ -10,7 +10,7 @@ const HomePage = () => {
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
 
-  const location = useLocation();
+  // const location = useLocation();
 
   const trendingFilms = async () => {
     try {

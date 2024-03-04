@@ -1,22 +1,28 @@
+import css from './MovieCast.module.css';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMoviesCast } from '../../components/API/API.js';
-
-const defaultImage =
-  'https://st2.depositphotos.com/3994049/8290/v/950/depositphotos_82902580-stock-illustration-retro-movie-projector-vector-detailed.jpg';
-const baseImageUrl = 'https://image.tmdb.org/t/p/w500';
+import { getMoviesCast } from '../API/API.js';
+import MovieCastCard from '../MovieCastCard/MovieCastCard.jsx';
+import Loader from '../Loader/Loader';
+import ErrorMessage from '../ErrorMessage/ErrorMessage.jsx';
 
 const MovieCast = () => {
   const { movieId } = useParams();
   const [casts, setCasts] = useState(null);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchCastData() {
       try {
+        setError(false);
+        setLoading(true);
         const fetchedCastData = await getMoviesCast(movieId);
         setCasts(fetchedCastData);
       } catch (error) {
-        console.error(error);
+        setError(true);
+      } finally {
+        setLoading(false);
       }
     }
     fetchCastData();
@@ -24,22 +30,20 @@ const MovieCast = () => {
 
   return (
     <>
-      {casts && (
-        <div>
-          <ul>
+      {loading && <Loader />}
+      {error && <ErrorMessage />}
+      {!loading && !error && casts && (
+        <>
+          <ul className={css.list}>
             {casts.cast.map(cast => (
-              <li key={cast.id}>
-                <img
-                  src={cast.profile_path ? `${baseImageUrl}${cast.profile_path}` : defaultImage}
-                  alt={cast.name}
-                />
-                <h3>{cast.name}</h3>
-                <p>Character: {cast.character}</p>
+              <li className={css.listItem} key={cast.id}>
+                <MovieCastCard cast={cast} />
               </li>
             ))}
           </ul>
-        </div>
+        </>
       )}
+      {!loading && !error && !casts && <p>Soory, but we don`t know this cast </p>}
     </>
   );
 };
