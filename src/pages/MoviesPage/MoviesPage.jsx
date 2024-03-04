@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { getFilm } from '../../components/API/API.js';
+import { getFilmsByQuery } from '../../components/API/API.js';
 import MovieList from '../../components/MovieList/MovieList.jsx';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import { useSearchParams } from 'react-router-dom';
 
 const MoviesPage = () => {
-  //   const location = useLocation();
+  // const location = useLocation();
 
   const [films, setFilms] = useState([]);
   const [error, setError] = useState(false);
@@ -23,8 +23,9 @@ const MoviesPage = () => {
 
   const searchFilms = async query => {
     try {
+      setError(false);
       setLoading(true);
-      const response = await getFilm(query);
+      const response = await getFilmsByQuery(query);
       setFilms(response);
     } catch (error) {
       setError(true);

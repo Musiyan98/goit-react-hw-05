@@ -10,7 +10,7 @@ export const getTrendMovies = async () => {
   return response.data.results;
 };
 
-export const getFilm = async query => {
+export const getFilmsByQuery = async query => {
   const response = await axios.get('search/movie', {
     params: {
       query: query,
